@@ -1,0 +1,75 @@
+title: smalljerry aka dsjerry
+subtitle: smalljerry
+description: >-
+  smalljerry博客是dsjerry平时学习前后端编程时候发布一些学习笔记和学习向导，这些知识在各大官网和学习网站都可以找到，但是在这里集中起来，方便查找和总结，了解自己平时学过了什么。
+keywords: '前端学习,后端学习,程序员博客,smalljerry,dsjerry'
+author: dsjerry
+language: zh-CN
+timezone: Asia/Shanghai
+url: 'https://smalljerry.cn'
+root: /
+permalink: ':year/:month/:day/:title/'
+permalink_defaults: null
+pretty_urls:
+  trailing_index: true
+  trailing_html: true
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: ':lang'
+skip_render: null
+new_post_name: ':title.md'
+default_layout: post
+titlecase: false
+external_link:
+  enable: true
+  field: site
+  exclude: ''
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+highlight:
+  enable: true
+  line_number: true
+  auto_detect: false
+  tab_replace: ''
+  wrap: true
+  hljs: false
+prismjs:
+  enable: false
+  preprocess: true
+  line_number: true
+  tab_replace: ''
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: '-date'
+default_category: uncategorized
+category_map: null
+tag_map: null
+meta_generator: true
+date_format: YYYY-MM-DD
+time_format: 'HH:mm:ss'
+updated_option: mtime
+per_page: 10
+pagination_dir: page
+include: null
+exclude: null
+ignore: null
+theme: icarus
+deploy:
+  type: git
+  repo: 'https://github.com/dsjerry/dsjerry.github.io.git'
+  branch: master
+baidu_analytics:
+  tracking_id: 4b1b8ea31347bc0c974b11aca38a6236
+beian:
+  title: 粤ICP备20067843号
+  url: 'http://beian.miit.gov.cn'
+server:
+  port: 4321

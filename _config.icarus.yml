@@ -1,0 +1,179 @@
+version: 5.1.0
+variant: default
+logo:
+  text: SMALLJERRY
+head:
+  favicon: https://avatars.githubusercontent.com/u/53891546?v=4
+  manifest:
+    name: dsjerry's blog
+    short_name: dsjerry
+    start_url:
+    theme_color:
+    background_color:
+    display: standalone
+    icons:
+      - src: ""
+        sizes: ""
+        type:
+  open_graph:
+    title:
+    type: blog
+    url:
+    image:
+    site_name:
+    author:
+    description:
+    twitter_card:
+    twitter_id:
+    twitter_site:
+    google_plus:
+    fb_admins:
+    fb_app_id:
+  structured_data:
+    title:
+    description:
+    url:
+    author:
+    image:
+  meta:
+    - ""
+  rss:
+navbar:
+  menu:
+    首页: /
+    归档: /archives
+    分类: /categories
+    标签: /tags
+    关于: /about
+  links:
+    My GitHub:
+      icon: fab fa-github
+      url: https://github.com/dsjerry
+footer:
+  links:
+    Creative Commons:
+      icon: fab fa-creative-commons
+      url: https://creativecommons.org/
+    Attribution 4.0 International:
+      icon: fab fa-creative-commons-by
+      url: https://creativecommons.org/licenses/by/4.0/
+    Download on GitHub:
+      icon: fab fa-github
+      url: https://github.com/ppoffice/hexo-theme-icarus
+beian:
+  title: 粤ICP备20067843号
+  url: http://beian.miit.gov.cn
+article:
+  highlight:
+    theme: atom-one-light
+    clipboard: true
+    fold: unfolded
+  readtime: true
+  licenses:
+    Creative Commons:
+      icon: fab fa-creative-commons
+      url: https://creativecommons.org/
+    Attribution:
+      icon: fab fa-creative-commons-by
+      url: https://creativecommons.org/licenses/by/4.0/
+    Noncommercial:
+      icon: fab fa-creative-commons-nc
+      url: https://creativecommons.org/licenses/by-nc/4.0/
+search:
+  type: insight
+comment:
+  type: changyan
+  app_id: cyv16UaRt
+  conf: prod_98785f0d345863265cd9f6df0d1aea6d
+share:
+  type: sharethis
+  install_url: https://platform-api.sharethis.com/js/sharethis.js#property=600a73038bb33e00116e6fcd&product=inline-share-buttons
+sidebar:
+  left:
+    sticky: false
+  right:
+    sticky: true
+widgets:
+  - position: right
+    type: profile
+    author: life is fantastic!🎆
+    author_title:
+    # location: Mar
+    avatar: https://avatars.githubusercontent.com/u/53891546?v=4
+    avatar_rounded: true
+    gravatar:
+      #follow_link:
+      # social_links:
+      # Github:
+      #   icon: fab fa-github
+      #   url: https://github.com/dsjerry
+      # Weibo:
+      #   icon: fab fa-weibo
+      #   url: https://weibo.com/smalljerry
+      # Instagram:
+      #   icon: fab fa-instagram
+      #   url: https://www.instagram.com/dsmalljerry/
+      # RSS:
+      #   icon: fas fa-rss
+      #   url: /
+  - position: right
+    type: toc
+    index: true
+    collapsed: true
+    depth: 4
+  - position: left
+    type: categories
+  - position: left
+    type: subscribe_email
+    description: 订阅更新 🙃
+    feedburner_id: smalljerry/fBtC
+  - position: left
+    type: tags
+  - position: left
+    type: links
+    links:
+      lofter: https://dsjerry.lofter.com/
+      Hexo: https://hexo.io
+      sharethis: https://platform.sharethis.com/
+      FontAwosome: https://fa5.dashgame.com
+  - position: left
+    type: recent_posts
+  - position: left
+    type: adsense
+    client_id: ca-pub-5233359657851046
+    slot_id: "1034023065"
+plugins:
+  animejs: true
+  back_to_top: true
+  baidu_analytics:
+    tracking_id: 4b1b8ea31347bc0c974b11aca38a6236
+  bing_webmaster:
+    tracking_id:
+  busuanzi: true
+  cnzz:
+    id:
+    web_id:
+  cookie_consent:
+    type: info
+    theme: edgeless
+    static: false
+    position: bottom-left
+    policyLink: https://www.cookiesandyou.com/
+  gallery: true
+  google_analytics:
+    tracking_id:
+  hotjar:
+    site_id:
+  katex: false
+  mathjax: false
+  outdated_browser: false
+  progressbar: true
+  statcounter:
+    project:
+    security:
+  twitter_conversion_tracking:
+    pixel_id:
+providers:
+  cdn: jsdelivr
+  fontcdn: google
+  iconcdn: fontawesome
