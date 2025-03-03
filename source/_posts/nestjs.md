@@ -90,7 +90,7 @@ nest g resource user
 - 此命令不会创建`dto`文件（用来规范客户端与服务端之间的数据格式），需手动创建
 - 文件一般被放在如`user/dto/create-user.dto.ts`这里
 
-![目录结构](nestjs.assets/image.png)
+![目录结构](https://s21.ax1x.com/2025/03/03/pEG7a0e.png)
 
 编辑后的代码示例：
 
@@ -269,7 +269,7 @@ npm install @types/passport-jwt @types/bcrypt --save-dev
 ```shell
 nest g resource auth
 ```
-![成功创建](nestjs.assets/image-1.png)
+![成功创建](https://s21.ax1x.com/2025/03/03/pEG70kd.png)
 
 实现用户注册（需要创建和数据库对应的entity），如：
 
@@ -548,4 +548,177 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 }
+```
+
+## D3
+
+1. 权限守卫
+2. 文件上传与静态资源托管
+3. WebSocket实时通信
+
+### 权限守卫
+
+创建角色装饰器，新建文件`src/auth/roles.decorator.ts`：
+
+```ts
+import { SetMetadata } from '@nestjs/common';
+
+export const Roles = (...roles: string[]) => SetMetadata('roles', roles);
+```
+
+实现守卫，新建文件`src/auth/roles.guard.ts`：
+
+```ts
+import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common'
+import { Reflector } from '@nestjs/core'
+
+@Injectable()
+export class RolesGuard implements CanActivate {
+  constructor(private reflector: Reflector) {}
+  canActivate(context: ExecutionContext): boolean {
+    // 获取接口所需的角色
+    const requiredRoles = this.reflector.get<string[]>(
+      'roles',
+      context.getHandler(),
+    );
+    if (!requiredRoles) return true;
+
+    // 模拟从请求中获取用户角色（实际应从 JWT 解析）
+    const request = context.switchToHttp().getRequest();
+    const user = request.user; // 假设 user 已通过 JWT 中间件注入
+    return requiredRoles.some((role) => user.roles?.includes(role));
+  }
+}
+```
+
+在控制器中使用守卫，如:
+
+```ts
+// src/users/users.controller.ts
+import { Roles } from '../auth/roles.decorator';
+import { RolesGuard } from '../auth/roles.guard';
+
+@Controller('users')
+@UseGuards(RolesGuard) // 全局应用守卫，或在模块中全局注册
+export class UserController {
+  @Get('admin')
+  @Roles('admin') // 仅允许 admin 角色访问
+  getAdminData() {
+    return { message: 'Admin data' };
+  }
+}
+```
+
+### 文件上传与静态资源托管
+
+#### 文件上传
+
+需要外安装依赖
+
+```bash
+npm install @nestjs/platform-express multer
+```
+
+```bash
+npm install @types/multer --save-dev
+```
+
+创建文件上传控制器：`src/files/files.controller.ts`
+
+```ts
+import { Controller, Post, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
+
+@Controller('files')
+export class FilesController {
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('file', {
+    storage: diskStorage({
+      destination: './uploads',
+      filename: (req, file, callback) => {
+        const randomName = Array(32).fill(null).map(() => Math.round(Math.random() * 16).toString(16)).join('');
+        callback(null, `${randomName}${extname(file.originalname)}`);
+      },
+    }),
+  }))
+  uploadFile(@UploadedFile() file: Express.Multer.File) {
+    return {
+      url: `/static/${file.filename}`,
+    };
+  }
+}
+```
+
+- `FileInterceptor`：文件上传拦截器（第一个参数是文件字段名（`formData`中的键名）
+
+托管静态文件，在`main.ts`中配置
+
+```ts
+// src/main.ts
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { join } from 'path';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  // 静态文件托管, 一般会指定到非源码目录
+  app.use('/static', express.static(join(__dirname, '..', 'uploads')));
+  await app.listen(3000);
+}
+bootstrap();
+```
+
+#### 静态资源托管
+
+除了上面的方式外，常用的处理方法还有
+
+- 使用 nginx 作为静态文件服务器
+- 使用 CDN 服务（阿里云OOS + CDN、腾讯云COS + CDN）
+- nestjs 自带的`ServeStaticModule`模块
+
+在 nginx 中配置：
+
+```nginx
+server {
+    listen 80;
+    server_name yourdomain.com;
+
+    location /static/ {
+        alias /var/www/static/; # 静态资源目录
+    }
+
+    location / {
+        proxy_pass http://localhost:3000; # 反向代理到 NestJS 应用
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+```
+
+使用`ServeStaticModule`，预先安装：
+
+```bash
+npm install @nestjs/serve-static
+```
+
+在`app.module.ts`中配置:
+
+```ts
+// src/app.module.ts
+import { Module } from '@nestjs/common';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+
+@Module({
+  imports: [
+    ServeStaticModule.forRoot({
+      rootPath: '/var/www/static', // 静态资源目录
+      serveRoot: '/static', // 访问路径
+    }),
+  ],
+})
+export class AppModule {}
 ```

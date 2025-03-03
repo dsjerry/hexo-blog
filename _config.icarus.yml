@@ -128,16 +128,19 @@ widgets:
     description: 订阅更新 🙃
     feedburner_id: smalljerry/fBtC
   - position: left
-    type: tags
-  - position: left
     type: links
     links:
       lofter: https://dsjerry.lofter.com/
-      Hexo: https://hexo.io
-      sharethis: https://platform.sharethis.com/
-      FontAwosome: https://fa5.dashgame.com
+      chat-ds: https://chat.smalljerry.cn/
+      bilibili: https://space.bilibili.com/85892062
+      douyin: https://www.douyin.com/user/MS4wLjABAAAAk81CD3MQxJmSkUKmeATakVo8e-bc3NYFBcHLT3dGv24
+      # Hexo: https://hexo.io
+      # sharethis: https://platform.sharethis.com/
+      # FontAwosome: https://fa5.dashgame.com
   - position: left
     type: recent_posts
+  - position: left
+    type: tags
   - position: left
     type: adsense
     client_id: ca-pub-5233359657851046
