@@ -5,7 +5,9 @@ type: about
 layout: about
 ---
 
-![img](https://z1.ax1x.com/2020/08/11/aLIESH.jpg)
+# 这是什么
+
+![某年的西湖](https://z1.ax1x.com/2020/08/11/aLIESH.jpg)
 
 **`网站内容`**
 
@@ -22,3 +24,9 @@ layout: about
 smalljerry AKA dsjerry 👉 📧 dsjerry@qq.com
 
 <span style="color: darkcyan; font-size: 1.5rem">努力学习，</span><span style="color: darkorange; font-size: 1.5rem">加油！</span>
+
+# 日志
+
+`2025-03-03`
+
+（AI）大语言模型的出现带来了颠覆性的变化，我应该如何追赶？
